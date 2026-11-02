@@ -1,0 +1,13 @@
+earthengine-api
+geemap
+geopandas
+rasterio
+pandas
+numpy
+matplotlib
+scipy
+statsmodels
+libpysal
+esda
+spreg
+jupyter

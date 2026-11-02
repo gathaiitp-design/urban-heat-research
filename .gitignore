@@ -1,0 +1,21 @@
+# Large / raw data
+data/raw/*
+!data/raw/README.md
+*.tif
+*.tiff
+*.nc
+*.zip
+
+# Python
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+
+# QGIS / OS clutter
+*.qgz~
+*.aux.xml
+.DS_Store
+Thumbs.db
