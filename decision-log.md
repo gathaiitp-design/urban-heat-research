@@ -2,4 +2,4 @@
 
 | Date | Decision | Options considered | Reason |
 |---|---|---|---|
-| 2026-11-02 | Project set up | — | — |
+| 2026-11-02 | Project set up: GitHub repo, GEE noncommercial project, QGIS LTR | — | — |
