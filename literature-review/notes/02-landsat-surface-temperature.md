@@ -1,28 +1,31 @@
-# Note 01 — Urban Heat Islands
-Source: EPA, Heat Island Effect (accessed 2026-11-02)
+# Note 02 — Landsat Land-Surface Temperature
+Source: USGS, Landsat Collection 2 Surface Temperature (accessed 2026-11-03)
 
 ## Key concepts
-- **Surface UHI:** urban surfaces (roofs, roads) hotter than rural. Measured by satellite. Peaks in the **day**.
-- **Atmospheric UHI:** urban air warmer than rural. Measured by weather stations. Often peaks at **night**.
-- **Causes:** heat-storing materials, low vegetation/water, dense geometry trapping heat, anthropogenic heat (ACs, vehicles).
+- Satellite measures **thermal radiation**, not temperature directly.
+- Stefan–Boltzmann: **E = εσT⁴** → same temperature, different emissivity (ε) → different signal.
+- **Brightness temperature** (assumes ε = 1) ≠ **LST** (corrected).
+- Two corrections: **atmospheric** (water vapour) and **emissivity** (surface material).
 
-## Surface energy balance
-**Q\* + Q_F = Q_H + Q_E + ΔQ_S**
-
-| Term | Meaning |
+## Product facts — Landsat 8/9 Collection 2 Level-2
+| Item | Value |
 |---|---|
-| Q\* | Net radiation absorbed |
-| Q_F | Anthropogenic heat |
-| Q_H | Sensible heat (warms air) |
-| Q_E | Latent heat (evaporation/transpiration — cooling) |
-| ΔQ_S | Heat stored in materials |
+| Band | ST_B10 |
+| Resolution | ~100 m native, resampled to 30 m |
+| Scaling | value × 0.00341802 + 149.0 = K; − 273.15 = °C |
+| Revisit | 16 days per satellite, ~8 days combined |
+| Overpass | ~10:00–10:30 am local |
+| QA bands | ST_QA (uncertainty), ST_CDIST (distance to cloud), QA_PIXEL (cloud mask) |
 
-- Albedo ↑ → Q\* ↓ (e.g., white roofs) → ΔQ_S ↓ → LST ↓
-- Vegetation cools by transpiration (Q_E ↑) and shading (Q\* ↓)
+Example: 44,000 → 299.39 K → **26.24 °C**. Always sanity-check the range.
 
-## Vulnerability
-**Vulnerability = Exposure × Sensitivity × (lack of) Adaptive capacity.** LST measures exposure only.
+## Limitations
+- Surface only (roofs, canopy tops) — not air, walls or street level
+- Mixed pixels at ~100 m
+- Clear-sky only; one morning snapshot
+- Humid/pre-monsoon air → larger correction → more uncertainty
+- Thin clouds can slip past the mask → pixels read too cold
+- Emissivity based on older land-cover data → errors in fast-changing areas
 
 ## Project link
-- Landsat (~10:30 am) captures **daytime surface heat**, not air or night-time heat.
-- High LST ≠ most vulnerable. Use "priority areas for further assessment".
+- Prefer dry, clear seasons (e.g., Mar–Apr in north India) for lower uncertainty.
