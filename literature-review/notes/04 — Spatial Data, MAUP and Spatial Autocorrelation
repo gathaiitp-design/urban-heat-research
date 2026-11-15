@@ -1,0 +1,32 @@
+# Note 04 — Spatial Data, MAUP and Spatial Autocorrelation
+Sources: UCGIS GIS&T Body of Knowledge, Problems of Scale and Zoning (accessed 2026-11-05)
+ 
+## From satellite image to analysis table
+1. **Raster:** grid of pixels, each holding one number (LST, NDVI, NDBI at 30 m).
+2. **Vector:** shapes — ward outlines, roads, points.
+3. **CRS:** both must use the same map coordinates. Reproject to a metre-based CRS (UTM) before analysis.
+4. **Resampling:** recalculating pixel values when changing grid size/CRS. Bilinear for continuous values, nearest neighbour for categories.
+5. **Zonal statistics:** summarise all pixels inside each ward (mean, max, etc.). A spatial GROUP BY.
+6. **Result:** one row per ward → correlation and regression.
+ 
+## MAUP — modifiable areal unit problem
+- Results depend on how zones are drawn.
+- **Zoning effect:** moving boundaries changes results (same data: 7.2 °C gap → 0.1 °C gap).
+- **Scale effect:** bigger zones smooth detail → relationships look stronger.
+- **Ecological fallacy:** a ward average does not describe every household in it.
+- **Plan:** main analysis by ward; robustness check on a 500 m grid; compare.
+ 
+## Spatial autocorrelation
+- Tobler's first law: near things are more related than distant things.
+- Neighbouring wards are not independent → regression p-values too optimistic.
+- Opposite risk to multicollinearity (which makes effects look weaker).
+- **Moran's I:** one score for the city. +1 clustered · 0 random · negative checkerboard.
+- **Spatial weights matrix:** defines neighbours (e.g., wards sharing a border).
+- **LISA:** label per ward — High–High (hot spot), Low–Low (cool spot), High–Low / Low–High (outliers).
+ 
+## Analysis sequence (Weeks 6–7)
+1. OLS: LST ~ NDVI + NDBI + controls
+2. Moran's I on residuals
+3. If clustered → spatial regression model
+4. LISA hot-spot map
+ 
